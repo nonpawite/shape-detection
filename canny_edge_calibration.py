@@ -13,7 +13,7 @@ import cv2 as cv
 import numpy as np
 
 # Define the width and height of the frame
-frameWidth = 640
+frameWidth  = 640
 frameHeight = 480
 
 # Access the default camera (camera 0)
@@ -29,7 +29,7 @@ def empty(x):
 
 # Create a window named "Parameters" and set its size
 cv.namedWindow("Parameters")
-cv.resizeWindow("Parameters", 640, 240)
+cv.resizeWindow("Parameters", 500, 100)
 
 # Create two trackbars to adjust the thresholds for Canny edge detection
 cv.createTrackbar("Threshold1", "Parameters", 100, 255, empty)
@@ -38,12 +38,10 @@ cv.createTrackbar("Threshold2", "Parameters", 200, 255, empty)
 # While the camera is open, perform the following actions
 while cap.isOpened():
     # Read the current frame from the camera
-    ret, img = cap.read()
+    _, img = cap.read()
 
-    # Apply a Gaussian blur to the image to remove noise
+    # Post Processing
     imgBlur = cv.GaussianBlur(img, (7, 7), 1)
-
-    # Convert the image to grayscale
     imgGray = cv.cvtColor(imgBlur, cv.COLOR_BGR2GRAY)
 
     # Get the current values of the trackbars
@@ -56,12 +54,9 @@ while cap.isOpened():
     # Apply Canny edge detection to the grayscale image using the current threshold values
     imgCanny = cv.Canny(imgGray, t1, t2)
 
-    # Convert the grayscale and Canny images to color for display purposes
-    imgGray = cv.cvtColor(imgGray, cv.COLOR_GRAY2BGR)
-    imgCanny = cv.cvtColor(imgCanny, cv.COLOR_GRAY2BGR)
-
     # Combine the original image and the Canny image side-by-side for display purposes
-    imgstack = np.hstack([img, imgCanny])
+    imgCanny = cv.cvtColor(imgCanny, cv.COLOR_GRAY2BGR)
+    imgstack = np.vstack([img, imgCanny])
 
     # Display the combined image
     cv.imshow('Output', imgstack)
