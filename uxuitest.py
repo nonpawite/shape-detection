@@ -44,12 +44,6 @@ def upload_file():
             cv.putText(img, "Pentagon", coords, font, 1, colour, 1)
         elif len(approx) == 6:
             cv.putText(img, "Hexagon", coords, font, 1, colour, 1)
-        elif len(approx) == 7:
-            cv.putText(img, "Heptagon", coords, font, 1, colour, 1)
-        elif len(approx) == 8:
-            cv.putText(img, "Octagon", coords, font, 1, colour, 1)
-        elif len(approx) == 9:
-            cv.putText(img, "Nonagon", coords, font, 1, colour, 1)
         else:
             cv.putText(img, "Circle", coords, font, 1, colour, 1)
 

@@ -82,18 +82,6 @@ def getContours(imgDil, imgContour):
             elif(edges == 6):
                 cv.putText(imgContour, "Hexagon", (x+w+20,y+45), cv.FONT_HERSHEY_COMPLEX, 0.7, (0, 0, 255), 0)
 
-            elif(edges == 7):
-                cv.putText(imgContour, "Heptagon", (x+w+20,y+45), cv.FONT_HERSHEY_COMPLEX, 0.7, (0, 0, 255), 0)
-            
-            elif(edges == 8):
-                cv.putText(imgContour, "Octagon", (x+w+20,y+45), cv.FONT_HERSHEY_COMPLEX, 0.7, (0, 0, 255), 0)
-
-            elif(edges == 9):
-                cv.putText(imgContour, "Nonagon", (x+w+20,y+45), cv.FONT_HERSHEY_COMPLEX, 0.7, (0, 0, 255), 0)
-
-            elif(edges == 10):
-                cv.putText(imgContour, "Unknown", (x+w+20,y+45), cv.FONT_HERSHEY_COMPLEX, 0.7, (0, 0, 255), 0)
-
             else:
                 cv.putText(imgContour, "Circle", (x+w+20,y+45), cv.FONT_HERSHEY_COMPLEX, 0.7, (0, 0, 255), 0)
 
