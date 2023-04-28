@@ -17,7 +17,7 @@ frameWidth  = 640
 frameHeight = 480
 
 # Access the default camera (camera 0)
-cap = cv.VideoCapture(0)
+cap = cv.VideoCapture(r"C:\Users\Pennywise\Documents\GitHub\shape-detection\\test_data\Comp 1.mp4")
 
 # Set the frame height and width
 cap.set(3, frameHeight)
@@ -32,26 +32,28 @@ def empty(x):
 # Detect Shape Function
 def getShape(cnt):
     shape = "Unknown"
-    
-    # Find number of edges in poltgon   
+
+    # Find number of edges in polygon   
     peri   = cv.arcLength(cnt, True)
-    approx = cv.approxPolyDP(cnt, 0.02 * peri, True)
+    approx = cv.approxPolyDP(cnt, 0.04 * peri, True)
     edges  = len(approx)
-    
+
     if edges == 3:
         shape = "Triangle"
     elif edges == 4:
-        shape = "Rectangle"
+        # Check if it's a square or rectangle
+        x, y, w, h = cv.boundingRect(cnt)
+        if abs(w - h) <= 10:
+            shape = "Square"
+        else:
+            shape = "Rectangle"
     elif edges == 5:
         shape  = "Pentagon"
     elif edges == 6:
         shape  = "Hexagon"
-    elif edges == 7:
-        shape = "Heptagon"
-    elif edges == 9:
-        shape = "Nonagon"
     else:
         shape = "Circle"
+        
     return shape
 
 
