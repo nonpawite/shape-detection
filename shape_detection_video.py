@@ -17,7 +17,7 @@ frameWidth  = 640
 frameHeight = 480
 
 # Access the default camera (camera 0)
-cap = cv.VideoCapture("D:\\iCloudDrive\\Documents\\Adobe\\After Effect\\Object Moving_AME\\Comp 1.mp4")
+cap = cv.VideoCapture(0)
 
 # Set the frame height and width
 cap.set(3, frameHeight)
@@ -53,6 +53,12 @@ def getShape(cnt):
         shape  = "Pentagon"
     elif edges == 6:
         shape  = "Hexagon"
+    elif edges == 7:
+        shape = "Heptagon"
+    elif edges == 8:
+        shape = "Octagon"
+    elif edges == 9:
+        shape = "Nonagon"
     else:
         shape = "Circle"
     return shape
@@ -63,7 +69,6 @@ cv.namedWindow("Shape Detection")
 cv.createTrackbar("Threshold1", "Shape Detection", 100,  255,   empty)
 cv.createTrackbar("Threshold2", "Shape Detection", 200,  255,   empty)
 cv.createTrackbar("Area",       "Shape Detection", 2000, 20000, empty)
-
 
 # Draw Contour Function
 def getContours(imgDil, imgContour):
@@ -123,7 +128,7 @@ while cap.isOpened():
     
     imgCanny = cv.cvtColor(imgCanny, cv.COLOR_GRAY2RGB)
     imgstack = np.vstack([img, imgCanny])
-    cv.imshow("Shape Detection", imgstack)
+    cv.imshow("Shape Detection", imgContour)
     
     # Wait for use to press 'q'
     if cv.waitKey(1) & 0xFF == ord('q'):
