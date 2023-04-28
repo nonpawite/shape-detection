@@ -41,22 +41,13 @@ def getShape(cnt):
     if edges == 3:
         shape = "Triangle"
     elif edges == 4:
-        # Check if shape is a square or a rectangle based on aspect ratio
-        x, y, w, h  = cv.boundingRect(approx)
-        aspectRatio = float(w)/h
-        
-        if aspectRatio >= 0.95 and aspectRatio <= 1.05:
-            shape = "Square"
-        else:
-            shape = "Rectangle"
+        shape = "Rectangle"
     elif edges == 5:
         shape  = "Pentagon"
     elif edges == 6:
         shape  = "Hexagon"
     elif edges == 7:
         shape = "Heptagon"
-    elif edges == 8:
-        shape = "Octagon"
     elif edges == 9:
         shape = "Nonagon"
     else:
@@ -86,7 +77,7 @@ def getContours(imgDil, imgContour):
 
         if area > areaMin:
             # Draw contour
-            cv.drawContours(imgContour, cnt, -1, (255, 0, 0), 2)
+            cv.drawContours(imgContour, cnt, -1, (255, 0, 0), 3)
 
             # Get shape
             shape = getShape(cnt)
